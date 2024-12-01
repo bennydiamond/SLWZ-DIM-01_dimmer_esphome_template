@@ -52,3 +52,47 @@ Use your favorite method to flash your ESPHome binary onto your device.
 
 Once flashed, confirm your device boots by unstrapping GPIO0 from GND.
 Once confirmed, you can proceed to solder back the previously removed resistor.
+
+
+# How to use
+Include this package and populate the necessary variables.
+
+Example of a device YAML file:
+```
+substitutions:
+  device_name: "my-wiz-dimmer"
+  device_friendly_name: "Dimmer"
+  api_key: "supersecretapikey"
+  ota_password: "otapsswd"
+  hotspot_name: "WiZ-dimmer-AP"
+  hotspot_password: !secret fallback_hotspot_password
+  log_level: "INFO"
+
+packages:
+  remote_package_files:
+    url: https://github.com/bennydiamond/elegrp_dtr10_dtr30_esphome_template
+    files: [.base.SLWZ-DIM-01_template.yaml]  # optional; if not specified, all files will be included
+    ref: master  # optional
+    refresh: 1d  # optional
+```
+
+## Customization
+
+Refer to ESPHome's documentation on [packages](https://esphome.io/components/packages) to customize your device.
+
+### Example of customization. 
+To remove the Fallback Wifi Hotspot component from your device, you would just need to add the following at the bottom of your device's yaml file.
+
+```
+wifi:
+  ap: !remove
+```
+
+To set static IP.
+```
+wifi:
+  manual_ip:
+    static_ip: 192.168.1.10
+    gateway: 192.168.1.1
+    subnet: 255.255.255.0
+```
