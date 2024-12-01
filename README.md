@@ -70,7 +70,7 @@ substitutions:
 
 packages:
   remote_package_files:
-    url: https://github.com/bennydiamond/elegrp_dtr10_dtr30_esphome_template
+    url: https://github.com/bennydiamond/SLWZ-DIM-01_dimmer_esphome_template
     files: [.base.SLWZ-DIM-01_template.yaml]  # optional; if not specified, all files will be included
     ref: master  # optional
     refresh: 1d  # optional
