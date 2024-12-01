@@ -5,6 +5,10 @@ esphome:
 esp8266:
   board: esp01_1m
 
+substitutions:
+  constant_min_brightness: "25"
+  constant_max_brightness: "255"
+
 # Enable Home Assistant API
 api:
   encryption:
@@ -84,7 +88,7 @@ light:
   - platform: tuya
     name: "Dimmer"
     dimmer_datapoint: 3
-    min_value: $constant_min_brightness
+    min_value: ${constant_min_brightness}
     min_value_datapoint: 102
     max_value: ${constant_max_brightness}
     switch_datapoint: 1
