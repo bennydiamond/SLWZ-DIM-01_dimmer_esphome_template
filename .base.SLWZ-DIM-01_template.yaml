@@ -108,8 +108,9 @@ number:
     min_value: 128
     max_value: ${constant_max_brightness}
     step: 1
+    entity_category: config
     web_server:
-      sorting_weight: 0
+      sorting_weight: 2
   - platform: tuya
     number_datapoint: 102
     name: "Brightness Min"
