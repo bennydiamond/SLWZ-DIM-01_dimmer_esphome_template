@@ -96,3 +96,53 @@ wifi:
     gateway: 192.168.1.1
     subnet: 255.255.255.0
 ```
+
+# Optional hardware mod
+
+You can wire the main switch button signal that goes to the TuyaMCU directly on a GPIO of the WiZ module.
+As the WiZ dimmer does not react to a long press of the button (the lights won't even toggle), we can intercept this signal and use it in event conditions, such as scenes.
+Soldering a wire between a solder pad and one of the input pin of the WiZ module is the recommended way.
+As illustrated below, switch signal is wired to GPIO13 on the WiZ module.
+![PXL_20241211_162857101](https://github.com/user-attachments/assets/c23c222d-439f-4919-806e-ee7ef45104f2)
+![PXL_20241211_162848897](https://github.com/user-attachments/assets/3341f3d2-e4a3-470d-9cd4-0af806e6267e)
+
+The following sample code can then be added to your top level yaml file. It will merge with the template of this GitHub repo when compiling
+
+```
+binary_sensor:
+  - platform: gpio
+    pin: 
+      number: GPIO13
+      mode:
+        input: True
+        pullup: False
+      inverted: True
+    name: "Switch"
+    internal: True
+    on_multi_click: 
+      - timing: 
+          - ON for at least 1500ms
+        then:
+          - event.trigger:
+              id: button1
+              event_type: longpress
+
+    on_double_click: 
+      then:
+        - event.trigger:
+            id: button1
+            event_type: doubleclick
+
+
+event:
+  - platform: template
+    id: button1
+    device_class: button
+    name: Button events
+    event_types:
+      - doubleclick
+      - longpress
+```
+
+This will expose a "Button events" entity that will record events named "longpress" and "doubleclick"
+"doubleclick" events are not recommended to be used as it will toggle twice the lights on that dimmer since the TuyaMCU will interpret each individual switch presses.
