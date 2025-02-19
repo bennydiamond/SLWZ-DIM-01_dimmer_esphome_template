@@ -84,6 +84,7 @@ text_sensor:
 button:
   - platform: restart
     name: "Device Restart"
+    id: id_button_device_restart
 
 tuya:
 
@@ -105,6 +106,7 @@ number:
   - platform: tuya
     number_datapoint: 101
     name: "Brightness Max"
+    id: id_number_brightness_max
     min_value: 128
     max_value: ${constant_max_brightness}
     step: 1
@@ -114,6 +116,7 @@ number:
   - platform: tuya
     number_datapoint: 102
     name: "Brightness Min"
+    id: id_number_brightness_min
     min_value: ${constant_min_brightness}
     max_value: 127
     step: 1
