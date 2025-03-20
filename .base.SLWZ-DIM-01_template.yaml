@@ -1,3 +1,7 @@
+substitutions:
+  api_disconnect_reboot_timeout: "15min"
+  wifi_disconnect_reboot_timeout: "15min"
+
 esphome:
   name: ${device_name}
   friendly_name: ${device_friendly_name}
@@ -11,6 +15,7 @@ substitutions:
 
 # Enable Home Assistant API
 api:
+  reboot_timeout: ${api_disconnect_reboot_timeout}
   encryption:
     key: ${api_key}
 
@@ -21,6 +26,7 @@ ota:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
+  reboot_timeout: ${wifi_disconnect_reboot_timeout}
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
