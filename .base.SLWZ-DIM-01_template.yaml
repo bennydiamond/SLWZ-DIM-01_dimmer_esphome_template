@@ -1,4 +1,6 @@
 substitutions:
+  constant_min_brightness: "25"
+  constant_max_brightness: "255"
   api_disconnect_reboot_timeout: "15min"
   wifi_disconnect_reboot_timeout: "15min"
 
@@ -11,10 +13,6 @@ esphome:
 
 esp8266:
   board: esp01_1m
-
-substitutions:
-  constant_min_brightness: "25"
-  constant_max_brightness: "255"
 
 # Enable Home Assistant API
 api:
