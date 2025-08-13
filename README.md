@@ -56,6 +56,7 @@ Once confirmed, you can proceed to solder back the previously removed resistor.
 
 # How to use
 Include this package and populate the necessary variables.
+Syslog requires a time component. Use your own and define the substitution variable `syslog_time_esphome_id` to reference the instance ID.
 
 Example of a device YAML file:
 ```yaml
@@ -66,7 +67,12 @@ substitutions:
   ota_password: "otapsswd"
   hotspot_name: "WiZ-dimmer-AP"
   hotspot_password: !secret fallback_hotspot_password
-  log_level: "INFO"
+  default_log_level: "INFO"
+  toggle_log_level_timeout_hours: "24"
+  syslog_server_ip: "192.168.0.1"
+  syslog_server_port: "514"
+  syslog_log_level: "INFO"
+  syslog_time_esphome_id: "id_time_esphome_component"
 
 packages:
   remote_package_files:
@@ -74,6 +80,15 @@ packages:
     files: [.base.SLWZ-DIM-01_template.yaml]  # optional; if not specified, all files will be included
     ref: master  # optional
     refresh: 1d  # optional
+	
+time:
+  - platform: sntp
+    id: ${syslog_time_esphome_id}
+    timezone: America/Toronto
+    servers:
+     - 0.pool.ntp.org
+     - 1.pool.ntp.org
+     - 2.pool.ntp.org
 ```
 
 ## Customization
