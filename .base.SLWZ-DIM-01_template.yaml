@@ -12,7 +12,7 @@ esphome:
   name: ${device_name}
   friendly_name: ${device_friendly_name}
   project:
-    name: wiz.SLWZ-DIM-01_template 
+    name: WiZ.SLWZ-DIM-01
     version: "1.3"
 
 esp8266:
