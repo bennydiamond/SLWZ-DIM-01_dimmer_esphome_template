@@ -13,7 +13,7 @@ esphome:
   friendly_name: ${device_friendly_name}
   project:
     name: WiZ.SLWZ-DIM-01
-    version: "1.3"
+    version: "1.4"
 
 esp8266:
   board: esp01_1m
@@ -32,6 +32,7 @@ wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
   reboot_timeout: ${wifi_disconnect_reboot_timeout}
+  min_auth_mode: WPA2
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
